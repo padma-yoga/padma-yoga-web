@@ -1,2 +1,2 @@
-# PADMA YOGA
+# Padma Yoga - Frontend Project
 
