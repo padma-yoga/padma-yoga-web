@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "lint": "eslint --ext .js --ignore-path .gitignore ."
   },
   "eslintConfig": {
     "extends": "react-app"
