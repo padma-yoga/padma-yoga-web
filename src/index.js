@@ -1,14 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "index.css";
-import App from "core/App";
-import * as serviceWorker from "core/serviceWorker";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import App from 'core/App'
+import Provider from 'core/store'
+import * as serviceWorker from 'core/serviceWorker'
+import theme from './theme'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  <MuiThemeProvider theme={theme}>
+    <Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
+  document.getElementById('root')
+)
 
-serviceWorker.register();
+serviceWorker.register()
