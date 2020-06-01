@@ -3,12 +3,12 @@ import colors from './colors'
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: colors.black,
-    },
-    secondary: {
-      main: colors.black,
-    },
+    // primary: {
+    //   main: colors.black,
+    // },
+    // secondary: {
+    //   main: colors.black,
+    // },
   },
   typography: {
     useNextVariants: true,
@@ -23,11 +23,20 @@ const theme = createMuiTheme({
       letterSpacing: '0.5px',
     },
     h2: {
+      fontSize: 32,
+      color: colors.black,
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      lineHeight: '150%',
+      textAlign: 'center',
+      letterSpacing: '0.5px',
+    },
+    h3: {
       fontSize: 24,
       color: colors.black,
       fontStyle: 'normal',
       fontWeight: 'bold',
-      lineHeight: 'normal',
+      lineHeight: '150%',
       textAlign: 'center',
       letterSpacing: '0.5px',
     },
