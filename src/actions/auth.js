@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { register } from 'api/auth'
 
 export async function registerUserAction(data) {
@@ -11,4 +10,8 @@ export async function registerUserAction(data) {
   } catch (error) {
     return error.errors ? error : { errors: [error.response.data.message] }
   }
+}
+
+export async function loginUserAction() {
+  // TODO
 }
