@@ -9,36 +9,28 @@ import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import TextField from 'components/TextField'
+import Toast from 'components/Toast'
 import Button from 'components/Button'
 import Copyright from 'components/Copyright'
 import { registerUserAction } from 'actions/auth'
+import { validateFields } from 'helpers/registerValidations'
 import styles from './styles'
 
 function Register() {
-  const [information, setInformation] = useState({})
+  const initialState = {
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+  }
+  const [information, setInformation] = useState(initialState)
   const [fieldError, setFieldError] = useState([])
+  const [completeFields, setCompleteFields] = useState(false)
+  const [errorList, setErrorList] = useState([])
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState([])
+  const [type, setType] = useState('')
 
   const classes = styles()
-
-  function onChangeField(event) {
-    const { name, value } = event.target
-
-    validateFields()
-
-    console.log(hasError(name))
-
-    if (hasError(name)) {
-      const teste = fieldError.filter((arr) => arr.name === name)[0]
-      console.log(teste)
-
-      setFieldError([])
-    }
-
-    setInformation({ ...information, [name]: value })
-    // if (!fieldError.length) {
-    // }
-    // return information
-  }
 
   function handleErrorMsg(key) {
     return fieldError.filter((arr) => arr.name === key)[0]?.msg
@@ -49,35 +41,57 @@ function Register() {
     return !!fieldError.filter((arr) => arr.name === key)[0]
   }
 
-  function error(name, msg) {
-    return setFieldError((fieldError) => [...fieldError, { name, msg }])
+  function setError(name, msg) {
+    setFieldError((fieldError) => [...fieldError, { name, msg }])
   }
 
-  function validateFields() {
-    const { email, password, passwordConfirmation } = information
+  function onChangeField(event) {
+    event.preventDefault()
+    const { name, value } = event.target
+    if (
+      information.email &&
+      information.password &&
+      information.passwordConfirmation
+    )
+      setCompleteFields(true)
+    if (errorList.length) {
+      setFieldError([])
+    }
+    setInformation({ ...information, [name]: value })
 
-    // if (!name) error('name', 'Campo obrigatório')
-    // if (!surname) error('surname', 'Campo obrigatório')
-    if (!email) error('email', 'Campo obrigatório')
-    if (!password) error('password', 'Campo obrigatório')
-    if (!passwordConfirmation)
-      error('passwordConfirmation', 'Campo obrigatório')
-
-    if (password !== passwordConfirmation)
-      error('passwordConfirmation', 'Confirmação da senha não confere!')
-
-    return fieldError
+    return information
   }
 
   async function onSubmit() {
-    if (fieldError.length) return alert('!!!')
+    const errorList = await validateFields(
+      information.email,
+      information.password,
+      information.passwordConfirmation
+    )
 
-    const { data, error } = await registerUserAction(information)
-    console.log('data: ', data)
-    console.log('error: ', error)
-    if (error) return alert(error.message)
+    if (errorList.length) {
+      errorList.forEach((error) => {
+        setError(error.field, error.message)
+      })
+      setErrorList(errorList)
+      return setInformation({ email: information.email })
+    }
 
-    return alert('Aluno cadastrado com sucesso!')
+    const { data, errors } = await registerUserAction(information)
+
+    if (errors) {
+      const msg = []
+      errors.forEach((error) => {
+        msg.push(error + '/ ')
+      })
+      setMessage(msg)
+      setType('error')
+      return setOpen(true)
+    }
+
+    setMessage(data.message)
+    setType('success')
+    return setOpen(true)
   }
 
   return (
@@ -92,7 +106,7 @@ function Register() {
             <LockOutlinedIcon />
           </Avatar>
 
-          <form className={classes.form} noValidate>
+          <div className={classes.form}>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}>
                 <TextField
@@ -126,6 +140,7 @@ function Register() {
                   helperText={handleErrorMsg('email')}
                   error={hasError('email')}
                   onChange={onChangeField}
+                  value={information.email}
                 />
               </Grid>
 
@@ -137,6 +152,7 @@ function Register() {
                   autoComplete="current-password"
                   helperText={handleErrorMsg('password')}
                   error={hasError('password')}
+                  value={information.password}
                   onChange={onChangeField}
                 />
               </Grid>
@@ -150,6 +166,7 @@ function Register() {
                   helperText={handleErrorMsg('passwordConfirmation')}
                   error={hasError('passwordConfirmation')}
                   onChange={onChangeField}
+                  value={information.passwordConfirmation}
                 />
               </Grid>
 
@@ -157,7 +174,7 @@ function Register() {
                 <Button
                   label="Registrar"
                   onClick={onSubmit}
-                  disabled={!!hasError()}
+                  disabled={!completeFields}
                 />
                 <Grid container>
                   <Grid item xs>
@@ -176,9 +193,15 @@ function Register() {
                 </Box>
               </Grid>
             </Grid>
-          </form>
+          </div>
         </div>
       </Grid>
+      <Toast
+        message={message}
+        open={open}
+        type={type}
+        onClose={() => setOpen(false)}
+      />
     </Grid>
   )
 }
