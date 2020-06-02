@@ -6,6 +6,8 @@ axios.defaults.baseURL = isLocalhost
   ? 'http://localhost:3001'
   : 'https://staging-padma-yoga-api.herokuapp.com'
 
+// axios.defaults.baseURL = 'https://staging-padma-yoga-api.herokuapp.com'
+
 axios.interceptors.request.use(
   (config) => {
     return { ...config, header: { 'Content-Type': 'application/json' } }
@@ -25,11 +27,6 @@ axios.interceptors.response.use(
     const { status, data } = error.response
     if (status === 400) return Promise.reject(data)
 
-    if (status === 401) {
-      localStorage.clear()
-      window.location = '/'
-      return window.location.reload()
-    }
     return Promise.reject(error)
   }
 )
