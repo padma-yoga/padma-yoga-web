@@ -6,6 +6,7 @@ import App from 'core/App'
 import Provider from 'core/store'
 import * as serviceWorker from 'core/serviceWorker'
 import theme from './theme'
+import './index.css'
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
