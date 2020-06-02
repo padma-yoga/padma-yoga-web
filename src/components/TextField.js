@@ -15,6 +15,7 @@ function StyledTextField(props) {
     autoFocus,
     onChange,
     helperText,
+    value,
   } = props
 
   return (
@@ -31,6 +32,7 @@ function StyledTextField(props) {
       onChange={onChange}
       helperText={helperText}
       fullWidth
+      value={value}
       error={error}
     />
   )
@@ -48,6 +50,7 @@ StyledTextField.propTypes = {
   helperText: PropType.string,
   autoFocus: PropType.bool,
   error: PropType.bool,
+  value: PropType.oneOf([PropType.string, PropType.number]),
 }
 
 StyledTextField.defaultProps = {
@@ -59,6 +62,7 @@ StyledTextField.defaultProps = {
   helperText: null,
   autoFocus: false,
   error: false,
+  value: '',
 }
 
 export default StyledTextField
