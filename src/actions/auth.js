@@ -9,6 +9,6 @@ export async function registerUserAction(data) {
     const response = await register(newData)
     return response
   } catch (error) {
-    return error
+    return error.errors ? error : { errors: [error.response.data.message] }
   }
 }
