@@ -1,10 +1,17 @@
 import axios from 'axios'
 
 const isLocalhost = window.location.origin.includes('localhost')
+const isStaging = window.location.origin.includes('staging-padma-yoga.netlify')
+const isProduction = window.location.origin.includes('padmayoga.netlify')
 
-axios.defaults.baseURL = isLocalhost
-  ? 'http://localhost:3001'
-  : 'https://staging-padma-yoga-api.herokuapp.com'
+function getUrl() {
+  if (isLocalhost) return 'http://localhost:3001'
+  if (isStaging) return 'https://staging-padma-yoga-api.herokuapp.com'
+  if (isProduction) return 'https://padma-yoga-api.herokuapp.com/'
+  return null
+}
+
+axios.defaults.baseURL = getUrl()
 
 // axios.defaults.baseURL = 'https://staging-padma-yoga-api.herokuapp.com'
 
