@@ -1,4 +1,4 @@
-import { register } from 'api/auth'
+import { register, login } from 'api/auth'
 
 export async function registerUserAction(data) {
   try {
@@ -12,6 +12,12 @@ export async function registerUserAction(data) {
   }
 }
 
-export async function loginUserAction() {
-  // TODO
+export async function loginUserAction(data) {
+  try {
+    const response = await login(data)
+
+    return response
+  } catch (error) {
+    return error
+  }
 }
