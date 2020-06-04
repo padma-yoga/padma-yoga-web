@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Header from '../Header'
 
 import TextField from 'components/TextField'
 import Toast from 'components/Toast'
@@ -95,20 +96,22 @@ function Register() {
   }
 
   return (
-    <Grid container className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Typography variant="h2">Cadastro de aluno/a</Typography>
+    <>
+      <Header />
+      <Grid container className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Typography variant="h2">Cadastro de aluno/a</Typography>
 
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
 
-          <div className={classes.form}>
-            <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
+            <div className={classes.form}>
+              <Grid container spacing={2}>
+                {/* <Grid item xs={12} sm={6}>
                 <TextField
                   name="name"
                   label="Nome"
@@ -131,78 +134,79 @@ function Register() {
                 />
               </Grid> */}
 
-              <Grid item xs={12}>
-                <TextField
-                  name="email"
-                  label="Email"
-                  type="email"
-                  autoComplete="email"
-                  helperText={handleErrorMsg('email')}
-                  error={hasError('email')}
-                  onChange={onChangeField}
-                  value={information.email}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  name="password"
-                  label="Senha"
-                  type="password"
-                  autoComplete="current-password"
-                  helperText={handleErrorMsg('password')}
-                  error={hasError('password')}
-                  value={information.password}
-                  onChange={onChangeField}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  name="passwordConfirmation"
-                  label="Confirmar senha"
-                  type="password"
-                  autoComplete="current-password"
-                  helperText={handleErrorMsg('passwordConfirmation')}
-                  error={hasError('passwordConfirmation')}
-                  onChange={onChangeField}
-                  value={information.passwordConfirmation}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Button
-                  label="Registrar"
-                  onClick={onSubmit}
-                  disabled={!completeFields}
-                />
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/" variant="body2">
-                      Esqueceu sua senha?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/" variant="body2">
-                      Já tem uma conta?
-                    </Link>
-                  </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    type="email"
+                    autoComplete="email"
+                    helperText={handleErrorMsg('email')}
+                    error={hasError('email')}
+                    onChange={onChangeField}
+                    value={information.email}
+                  />
                 </Grid>
-                <Box mt={5}>
-                  <Copyright />
-                </Box>
+
+                <Grid item xs={12}>
+                  <TextField
+                    name="password"
+                    label="Senha"
+                    type="password"
+                    autoComplete="current-password"
+                    helperText={handleErrorMsg('password')}
+                    error={hasError('password')}
+                    value={information.password}
+                    onChange={onChangeField}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    name="passwordConfirmation"
+                    label="Confirmar senha"
+                    type="password"
+                    autoComplete="current-password"
+                    helperText={handleErrorMsg('passwordConfirmation')}
+                    error={hasError('passwordConfirmation')}
+                    onChange={onChangeField}
+                    value={information.passwordConfirmation}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Button
+                    label="Registrar"
+                    onClick={onSubmit}
+                    disabled={!completeFields}
+                  />
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="/" variant="body2">
+                        Esqueceu sua senha?
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href="/" variant="body2">
+                        Já tem uma conta?
+                      </Link>
+                    </Grid>
+                  </Grid>
+                  <Box mt={5}>
+                    <Copyright />
+                  </Box>
+                </Grid>
               </Grid>
-            </Grid>
+            </div>
           </div>
-        </div>
+        </Grid>
+        <Toast
+          message={message}
+          open={open}
+          type={type}
+          onClose={() => setOpen(false)}
+        />
       </Grid>
-      <Toast
-        message={message}
-        open={open}
-        type={type}
-        onClose={() => setOpen(false)}
-      />
-    </Grid>
+    </>
   )
 }
 

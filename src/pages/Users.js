@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getUsersAction } from 'actions/users'
+import Header from './Header'
 
 function Users() {
   const [users, setUsers] = useState([])
@@ -17,6 +18,7 @@ function Users() {
 
   return (
     <>
+      <Header />
       <h1>Lista de Usuários</h1>
       {users.map((user) => {
         return (

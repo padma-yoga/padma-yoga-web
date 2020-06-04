@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import axios from '../../api/index'
-
+import Header from '../Header'
 import TextField from 'components/TextField'
 import Toast from 'components/Toast'
 import Button from 'components/Button'
@@ -45,6 +45,7 @@ function Login() {
   const classes = styles()
   return (
     <>
+      <Header />
       <Grid container className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

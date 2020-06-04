@@ -3,10 +3,12 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import image from 'assets/underConstruction.jpg'
+import Header from './Header'
 
 function UnderConstruction() {
   return (
     <Container>
+      <Header />
       <Grid justify="center" spacing={50}>
         <Typography variant="h1">Bem vindo a Padma Yoga</Typography>
         <Grid>

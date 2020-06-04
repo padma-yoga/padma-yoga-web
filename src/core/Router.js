@@ -9,6 +9,7 @@ import Login from 'pages/Login/index'
 import Users from 'pages/Users'
 import UnderConstruction from 'pages/UnderConstruction'
 import PageNotFound from 'pages/PageNotFound'
+import Header from '../pages/Header'
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/register" component={(props) => <Register {...props} />} />
       <Route path="/login" component={(props) => <Login {...props} />} />
       <Route path="/users" component={(props) => <Users {...props} />} />
+      <Route path="/header" component={(props) => <Header {...props} />} />
       <Route path="*" component={(props) => <PageNotFound {...props} />} />
     </Switch>
   )
