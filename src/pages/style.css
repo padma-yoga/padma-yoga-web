@@ -1,6 +1,20 @@
 .links {
-  color: green;
+  color: #0059b3;
   text-decoration: none;
   display: true;
   padding: 0 10px;
+}
+
+.menu {
+  color: #004080;
+  font-size: 16px;
+}
+
+.title {
+  color: #004d99;
+  font-size: 23px;
+}
+
+.table {
+  background: #ffffe6;
 }

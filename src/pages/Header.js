@@ -23,7 +23,7 @@ export default function SimpleMenu() {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        Menu
+        <span className="menu"> Menu </span>
       </Button>
       <Menu
         id="simple-menu"
@@ -33,7 +33,7 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <Link href="/" className="links">
+          <Link href="/">
             <span className="links">Home</span>
           </Link>
         </MenuItem>
@@ -49,7 +49,7 @@ export default function SimpleMenu() {
         </MenuItem>
 
         <MenuItem onClick={handleClose}>
-          <Link href="/users" className="links">
+          <Link href="/users">
             <span className="links">Listagem</span>
           </Link>
         </MenuItem>
