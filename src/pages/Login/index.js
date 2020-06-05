@@ -18,8 +18,8 @@ import { loginUserAction } from 'actions/auth'
 import styles from './styles'
 
 function Login() {
-  const [email, setEmail] = useState('ornitorrincos@gmail.com')
-  const [password, setPassword] = useState('ABCdef123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
   const [type, setType] = useState('')
