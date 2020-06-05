@@ -18,9 +18,9 @@ import styles from './styles'
 
 function Register() {
   const initialState = {
-    email: 'ornitorrincos@gmail.com',
-    password: 'ABCdef123',
-    passwordConfirmation: 'ABCdef123',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
   }
   const [information, setInformation] = useState(initialState)
   const [fieldError, setFieldError] = useState([])
