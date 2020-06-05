@@ -12,15 +12,16 @@ import TextField from 'components/TextField'
 import Toast from 'components/Toast'
 import Button from 'components/Button'
 import Copyright from 'components/Copyright'
+import Page from 'components/Page'
 import { registerUserAction } from 'actions/auth'
 import { validateFields } from 'helpers/registerValidations'
 import styles from './styles'
 
 function Register() {
   const initialState = {
-    email: 'ornitorrincos@gmail.com',
-    password: 'ABCdef123',
-    passwordConfirmation: 'ABCdef123',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
   }
   const [information, setInformation] = useState(initialState)
   const [fieldError, setFieldError] = useState([])
@@ -95,7 +96,7 @@ function Register() {
   }
 
   return (
-    <Grid container className={classes.root}>
+    <Page>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -177,13 +178,8 @@ function Register() {
                   disabled={!completeFields}
                 />
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="/" variant="body2">
-                      Esqueceu sua senha?
-                    </Link>
-                  </Grid>
                   <Grid item>
-                    <Link href="/" variant="body2">
+                    <Link href="/login" variant="body2">
                       Já tem uma conta?
                     </Link>
                   </Grid>
@@ -202,7 +198,7 @@ function Register() {
         type={type}
         onClose={() => setOpen(false)}
       />
-    </Grid>
+    </Page>
   )
 }
 
