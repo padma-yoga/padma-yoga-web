@@ -14,3 +14,7 @@ export function getItem(key) {
 export function clearItem(key) {
   return localStorage.removeItem(key)
 }
+
+export function clearStorage() {
+  return localStorage.clear()
+}

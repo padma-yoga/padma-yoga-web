@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { loginUserAction } from 'actions/auth'
-
+import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Link from '@material-ui/core/Link'
@@ -9,19 +8,22 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import axios from '../../api/index'
 
 import TextField from 'components/TextField'
 import Toast from 'components/Toast'
 import Button from 'components/Button'
 import Copyright from 'components/Copyright'
-import { registerUserAction } from 'actions/auth'
-import { validateFields } from 'helpers/registerValidations'
+import { keys, saveItem, clearStorage } from 'helpers/storage'
+import { loginUserAction } from 'actions/auth'
 import styles from './styles'
 
 function Login() {
-  const [email, setEmail] = useState('vitoria@gmail.com')
-  const [password, setPassword] = useState('Vitoria123@')
+  const [email, setEmail] = useState('ornitorrincos@gmail.com')
+  const [password, setPassword] = useState('ABCdef123')
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  const [type, setType] = useState('')
+  const { push } = useHistory()
 
   function onChangeField(event) {
     const { name, value } = event.target
@@ -31,17 +33,26 @@ function Login() {
 
   async function onRegister() {
     const information = { email, password }
-    try {
-      const { data, error } = await loginUserAction(information)
-      if (error) return alert('error')
-      console.log(data.token)
 
-      alert('Login efetuado com Sucesso!')
-      return console.log(data.user)
-    } catch (error) {
-      return alert('ERRO de login!')
+    const { data, errors } = await loginUserAction(information)
+
+    if (errors) {
+      errors.map((error) => {
+        return setMessage(`${message}/${error}`)
+      })
+      setType('error')
+      setOpen(true)
+
+      return clearStorage()
     }
+    const { user, token } = data
+
+    saveItem(keys.data, JSON.stringify({ email: user.email }))
+    saveItem(keys.token, token)
+
+    return push('/')
   }
+
   const classes = styles()
   return (
     <>
@@ -106,9 +117,13 @@ function Login() {
             </div>
           </div>
         </Grid>
-        {/*  <Toast message={'Logou certo'} />*/}
+        <Toast
+          type={type}
+          message={message}
+          open={open}
+          onClose={() => setOpen(false)}
+        />
       </Grid>
-      }
     </>
   )
 }
