@@ -1,7 +1,12 @@
 import React from 'react'
+import Page from 'components/Page'
 
 function About() {
-  return <h1>About</h1>
+  return (
+    <Page>
+      <h1>About</h1>
+    </Page>
+  )
 }
 
 export default About

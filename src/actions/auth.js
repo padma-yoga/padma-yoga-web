@@ -18,6 +18,12 @@ export async function loginUserAction(data) {
 
     return response
   } catch (error) {
-    return error
+    if (error === 'Network Error') {
+      return { errors: ['Problemas na rede. Tente mais tarde!'] }
+    }
+
+    if (error.response) return { errors: error.response.data.message }
+
+    return { errors: [error.message] }
   }
 }

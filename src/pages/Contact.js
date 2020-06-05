@@ -1,7 +1,12 @@
 import React from 'react'
+import Page from 'components/Page'
 
 function Contact() {
-  return <h1>Contact</h1>
+  return (
+    <Page>
+      <h1>Contact</h1>
+    </Page>
+  )
 }
 
 export default Contact

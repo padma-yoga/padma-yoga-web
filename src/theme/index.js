@@ -10,6 +10,7 @@ const theme = createMuiTheme({
     //   main: colors.black,
     // },
   },
+  colors,
   typography: {
     useNextVariants: true,
     fontFamily: 'Roboto',
